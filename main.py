@@ -1,6 +1,5 @@
 from src.procesos import cargar_datos, procesar_datos
-from src.modelos  import entrenar_modelo
-
+from src.modelos import entrenar_modelo
 
 def main() -> None:
     df = cargar_datos("data/housing.csv")
@@ -12,7 +11,6 @@ def main() -> None:
     print(f"Score de entrenamiento: {r2_tr:.4f}")
     print(f"Score de prueba:       {r2_te:.4f}")
     print(f"RMSE:                  {rmse:,.2f}")
-
 
 if __name__ == "__main__":
     main()
