@@ -18,7 +18,7 @@ def entrenar_modelo(df: pd.DataFrame) -> Tuple[Pipeline, float, float, float]:
     modelo = Pipeline([
         ("scaler", StandardScaler()),
         ("poly", PolynomialFeatures(degree=2, include_bias=False)),
-        ("ridge", RidgeCV(alphas=np.logspace(-3, 3, 10), cv=5))
+        ("ridge", RidgeCV(alphas=np.logspace(-2, 2, 20), cv=5))
     ])
 
     modelo.fit(X_tr, y_tr)
@@ -28,6 +28,4 @@ def entrenar_modelo(df: pd.DataFrame) -> Tuple[Pipeline, float, float, float]:
     r2_test  = modelo.score(X_te, y_te)
     rmse     = np.sqrt(mean_squared_error(y_te, y_pred))
 
-    print(f"[DEBUG] R² train: {r2_train:.4f} — R² test: {r2_test:.4f} — RMSE: {rmse:,.0f}")
-    print(f"[DEBUG] Alpha óptimo: {modelo.named_steps['ridge'].alpha_:.6f}")
     return modelo, r2_train, r2_test, rmse

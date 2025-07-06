@@ -24,6 +24,10 @@ def procesar_datos(df: pd.DataFrame) -> pd.DataFrame:
     df["bedroom_ratio"]            = df["total_rooms"] / df["total_bedrooms"]
     df["income_sq"]                = df["median_income"] ** 2
     df["log_income"]               = np.log1p(df["median_income"])
+    df["median_income_cubed"] = df["median_income"] ** 3
+    df["rooms_density"] = df["total_rooms"] / (df["population"] + 1)
+    df["income_times_rooms"] = df["median_income"] * df["total_rooms"]
+
 
     cols = [c for c in df.columns if c != "median_house_value"] + ["median_house_value"]
     return df[cols]
